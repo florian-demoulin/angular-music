@@ -1,0 +1,10 @@
+<ul>
+        <li *ngFor="let hobbie of hobbies, let i= index" 
+            [ngStyle]="{color: 'green'}"
+            (click)="onDeleteHobby(i)"
+        >
+      
+          {{i}} - {{hobbie}}
+      
+        </li>
+      </ul>
