@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import { HobbyService } from './hobby.service';
+import { ChanteurService } from './chanteur.service'; 
 
-
-
-//let chart = am4core.create("chartdiv", am4plugins_timeline.CurveChart); 
 
 @Component({
   selector: 'app-root',
@@ -11,36 +8,30 @@ import { HobbyService } from './hobby.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private hobbyService: HobbyService) {}
-
-  title:string = 'angular-framework-intro';
-  hobbies = [];
-
-  newHobby = "";
-
-  onNewHobby(){
-    console.log("new hobbie : " + this.newHobby);
-    this.hobbies.push(this.newHobby);
-    this.newHobby = "";
+  constructor(private chanteurService: ChanteurService) {
+    
   }
 
-  onUserWasClicked(nameEvent){
-    console.log("name event: " + nameEvent);
+  title = 'angular-projet-wasabi';
+  chanteursMostBands;
+  artistWithMostAlbum;
+  allSongsOfAllAlbumsOfEminem;
+
+  ngOnInit(): void {  
+    this.getMostBands();
+    this.getArtistsWithMostAlbum();
+    this.getAllSongsOfAllAlbumsOfEminem();
   }
 
-  
-  
-  ngOnInit(): void {
-    this.getHobbies();
+  getArtistsWithMostAlbum() {
+    this.artistWithMostAlbum = this.chanteurService.getArtistsWithMostAlbum();
   }
 
-  getHobbies() {
- 
-    this.hobbyService.getHobbies().then(response => {
- 
-      this.hobbies = response;
-      console.log(this.hobbies);
-    });
+  getMostBands() {
+    this.chanteursMostBands = this.chanteurService.getMostBands();
   }
-  
+
+  getAllSongsOfAllAlbumsOfEminem(){
+    this.allSongsOfAllAlbumsOfEminem = this.chanteurService.getAllSongsOfAllAlbumsOfEminem();
+  }
 }
